@@ -1,0 +1,139 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>NeuroGrid Simulator Applet Explanation</title>
+</head>
+
+<body>
+
+<h1>NeuroGrid Simulator Applet Instructions</h1>
+<p>The NeuroGrid Simulator applet can simulate a variety of routing  
+methodologies in small peer to peer networks.&nbsp; The code can be found at <a href="http://www.sourceforge.net/projects/neurogrid/">http://www.sourceforge.net/projects/neurogrid/</a>  
+and includes classes that operate without the applet GUI that allow simulations  
+to be performed with much larger numbers of nodes, and appropriate statistics to  
+be calculated.</p> 
+<p>However the applet itself is a useful debugging tool to see what is going on  
+in the network at a small scale.&nbsp; Various parameters can be adjusted using  
+the applet GUI, and hitting the restart button will stop the current network  
+simulation and re-initialize the network using the new parameters.&nbsp;&nbsp;</p> 
+<p>The basic operation of the simulation is to create a collection of documents  
+that are then assigned keywords either randomly or according to the <a href="http://www.cut-the-knot.com/do_you_know/zipfLaw.html">Zipf  
+distribution</a>.&nbsp; Then the network is created according to the relevant  
+parameters and documents distributed over the nodes.&nbsp; Searches are then  
+performed in serial, a document from the collection being selected at random and  
+a search being conducted for that document by looking for nodes that contain  
+documents with the keywords belonging to that document.&nbsp; The GUI doesn't  
+display much information about where which documents are located at the moment,  
+but that is partly because I haven't had time to add that, and partly because it  
+is not clear how best to display that information without hopelessly cluttering  
+up the display.</p> 
+<p>The green lines are connections between nodes.&nbsp; The squares are nodes,  
+and the orange blobs are messages.&nbsp; The nodes turn from white to gray when  
+they receive a message allowing us to follow what proportion of the network has  
+been reached in the current search.</p> 
+<p>You can see some of the results of simulations using this code at <a href="http://www.neurogrid.net/si-simulation02.html">http://www.neurogrid.net/si-simulation02.html</a></p>
+<p>The parameters affect the simulation as follows:</p> 
+<table border="1" width="100%" height="493"> 
+  <tr> 
+    <td width="50%" height="48">Zipf Checkbox</td> 
+    <td width="50%" height="48">When ticked the keywords are assigned to  
+      documents according to a Zipf Distribution, when not ticked the  
+      distribution if Uniform.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="48">Knowledge Checkbox</td> 
+    <td width="50%" height="48">When ticked, nodes exchange lists of keywords  
+      that they have documents associated with, with their immediate neighbours.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="64">Learning Checkbox</td> 
+    <td width="50%" height="64">When ticked the results of searches lead to the  
+      updating of knowledge base of the node initiating the search, i.e. it  
+      learns to associate the node that contained the relevant document with the  
+      keywords used in the search.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="48">Ring Checkbox</td> 
+    <td width="50%" height="48">When ticked the nodes are connected in a regular  
+      fashion creating a ring.&nbsp; When not ticked, the connections are  
+      created randomly.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16"></td> 
+    <td width="50%" height="16"></td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Node Number</td> 
+    <td width="50%" height="16">The number of nodes the network starts with, and  
+      the number that will be added at the end of the Run Length</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Thread Sleep</td> 
+    <td width="50%" height="16">The number of milliseconds pause in-between each  
+      message forward.&nbsp; Going below 100 milliseconds in a browser normally  
+      crashes the system.&nbsp; If you want more speed, download the code and  
+      run in an appletviewer.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Forwarding</td> 
+    <td width="50%" height="16">The number of connected nodes to forward a  
+      message to.&nbsp; When set to zero each forwarding of a message will be to  
+      all connected nodes - Gnutella-like behaviour.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Run Length</td> 
+    <td width="50%" height="16">The number of searches performed before the  
+      Network grows by adding additional nodes equal to the Node Number</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">No Documents</td> 
+    <td width="50%" height="16">The number of documents in the simulation.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">No Keywords</td> 
+    <td width="50%" height="16">The number of keywords in the simulation.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Keywords per Document</td> 
+    <td width="50%" height="16">The number of keywords assigned to each  
+      document.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="13">Documents per Node</td> 
+    <td width="50%" height="13">The number of documents distributed to each  
+      node.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Start TTL </td> 
+    <td width="50%" height="16">The Time To Live (TTL) of each message, i.e. the  
+      number of times it can be forwarded before it expires.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Degree of Correlation</td> 
+    <td width="50%" height="16">Can be used to force initial neighbours to have  
+      related collections of documents.&nbsp; The higher the value the more  
+      keywords that any two connected nodes will have in common at the start of  
+      the simulation - should really be replaced with an appropriate node  
+      addition scheme where nodes connect to other nodes with similar content.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Conns per Node</td> 
+    <td width="50%" height="16">The number of starting connections for each  
+      node.</td> 
+  </tr> 
+  <tr> 
+    <td width="50%" height="16">Debug Verbosity</td> 
+    <td width="50%" height="16">Controls the verbosity of the simulation, i.e.  
+      the detail of the debug messages.</td> 
+  </tr> 
+</table> 
+<p>Please mail any questions to <a href="mailto:sam@neurogrid.com">sam@neurogrid.com</a></p> 
+<p>　</p> 
+ 
+</body> 
+ 
+</html> 

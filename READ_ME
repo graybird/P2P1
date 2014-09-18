@@ -1,0 +1,54 @@
+****************=====NG_SIMULATOR=====****************
+
+This file contains information relating to the simulator and what to do if ant fails to work.
+Please check http://www.neurogrid.net/ for more information on NeuroGrid and this simulator.
+Don't hesitate to mail neurogrid-simulation@lists.sourceforge.net with any questions.
+
+So if you can't get ant (the make tool) to work on your system, your first recourse should be to check the ant documentation.
+
+http://jakarta.apache.org/ant/manual/index.html
+
+Once you've got the ANT_HOME, JAVA_HOME variables set, and added ng_simulator/ant/bin to your path you should be able to run commands like:
+
+ant javadoc
+ant                // this will build the java classes
+ant clean
+ant testall        // this will run all the unit tests ...
+ant simulation     // this will run an example simulation ...
+
+etc.  Although you may also need to increase the amount of environment space allocated (a problem with win98), and add the ant library jars to your classpath.
+
+If setting up ant seems like to much trouble, here are the commands that will allow you to build the simulator, run it and create the jar file needed to get the applet GUI working.
+
+***Compiling the source code***
+
+javac com/neurogrid/simulation/*.class
+
+***Running the simulations***
+
+cd build
+
+java -classpath .:../lib/log4j-1.1.3.jar com.neurogrid.simulation.Simulation  ./../PARAMETERS.properties
+
+and
+
+java -classpath .:../lib/log4j-1.1.3.jar com.neurogrid.simulation.AdvancedSimulation ./../ADVANCED_PARAMETERS.properties
+
+Will run multiple searches through networks created from specifications in the parameter files PARAMETER.properties and ADVANCED_PARAMETER.properties respectively.
+
+Details about the meanings of the different parameters can be found at:
+
+http://www.neurogrid.net/php/simulation_parameters.php
+
+and details on how to extend the code can be found here:
+
+http://www.neurogrid.net/CodeCamp_EnglishVersion.htm
+
+***Creating the jar file***
+
+move to the src directory and use this command
+jar cvf Simulator.jar com/neurogrid/simulation/*.class com/neurogrid/simulation/root/*.class com/neurogrid/parser/MultiHashtable.class
+
+====NOTE===
+
+We make no claims that the Freenet simulator corresponds exactly to a particular version of Freenet.  The code is based on Ian Clarke's original Freenet paper, and subsequent discussions on the Freenet mailing list.
